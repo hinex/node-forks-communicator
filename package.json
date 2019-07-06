@@ -1,0 +1,28 @@
+{
+  "name": "forks-communicator",
+  "version": "0.0.1",
+  "description": "Node.js fork communicator (messages between processes)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hinex/node-forks-communicator.git"
+  },
+  "keywords": [
+    "nodejs",
+    "forks",
+    "communicator",
+    "observer"
+  ],
+  "author": "Roman Hinex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hinex/node-forks-communicator/issues"
+  },
+  "homepage": "https://github.com/hinex/node-forks-communicator#readme",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}
