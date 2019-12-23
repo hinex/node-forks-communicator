@@ -24,8 +24,8 @@ const { fork } = require("child_process");
 const { join } = require("path");
 
 // Wrap forks in the communicator
-setup(fork(join(__dirname, "/child/worker.js")));
-setup(fork(join(__dirname, "/child/another_worker.js")));
+setup(fork(join(__dirname, "/child/process.js")));
+setup(fork(join(__dirname, "/child/another_process.js")));
 
 // Subscribe to channels from master process
 subscribe("say", ({ message }) => console.log(`[master] recived: ${message}`));
@@ -45,8 +45,8 @@ const { Worker } = require("worker_threads");
 const { join } = require("path");
 
 // Wrap forks in the communicator
-setup(new Worker(join(__dirname, "/child/fork.js")));
-setup(new Worker(join(__dirname, "/child/another_fork.js")));
+setup(new Worker(join(__dirname, "/child/process.js")));
+setup(new Worker(join(__dirname, "/child/another_process.js")));
 
 // Subscribe to channels from master process
 subscribe("say", ({ message }) => console.log(`[master] recived: ${message}`));
@@ -57,7 +57,7 @@ subscribe("requestYeah", () => {
 
 ```
 
-#### child/worker.js
+#### child/process.js
 
 ```js
 const { emit, subscribe } = require("forks-communicator/fork");
@@ -76,7 +76,7 @@ setTimeout(() => {
 }, 1000);
 ```
 
-#### child/another_worker.js
+#### child/another_process.js
 
 ```js
 const { emit, subscribe } = require("forks-communicator/fork");
