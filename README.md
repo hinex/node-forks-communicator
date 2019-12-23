@@ -12,9 +12,9 @@ npm install forks-communicator --save
 
 [Examples available here!](https://github.com/hinex/node-forks-communicator/blob/master/example)
 
-Just clone, go to the directory and run index.js.
+Just clone, go to the example directory and run `fork.js` or `worker.js`.
 
-#### index.js
+#### fork.js - Fork example
 
 Create master and forks then wrap forks to the communicator. For master use `forks-communicator` and for forks `forks-communicator/fork`.
 
@@ -24,8 +24,8 @@ const { fork } = require("child_process");
 const { join } = require("path");
 
 // Wrap forks in the communicator
-setup(fork(join(__dirname, "/fork.js")));
-setup(fork(join(__dirname, "/another_fork.js")));
+setup(fork(join(__dirname, "/child/worker.js")));
+setup(fork(join(__dirname, "/child/another_worker.js")));
 
 // Subscribe to channels from master process
 subscribe("say", ({ message }) => console.log(`[master] recived: ${message}`));
@@ -35,7 +35,29 @@ subscribe("requestYeah", () => {
 });
 ```
 
-#### fork.js
+#### worker.js - Worker example
+
+Create master and forks then wrap forks to the communicator. For master use `forks-communicator` and for forks `forks-communicator/fork`.
+
+```js
+const { setup, subscribe, emit } = require("../index");
+const { Worker } = require("worker_threads");
+const { join } = require("path");
+
+// Wrap forks in the communicator
+setup(new Worker(join(__dirname, "/child/fork.js")));
+setup(new Worker(join(__dirname, "/child/another_fork.js")));
+
+// Subscribe to channels from master process
+subscribe("say", ({ message }) => console.log(`[master] recived: ${message}`));
+subscribe("requestYeah", () => {
+  // Send message from master to all subscribtions
+  emit("all", "yeah");
+});
+
+```
+
+#### child/worker.js
 
 ```js
 const { emit, subscribe } = require("forks-communicator/fork");
@@ -54,7 +76,7 @@ setTimeout(() => {
 }, 1000);
 ```
 
-#### another_fork.js
+#### child/another_worker.js
 
 ```js
 const { emit, subscribe } = require("forks-communicator/fork");

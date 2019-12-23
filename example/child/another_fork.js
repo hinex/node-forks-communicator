@@ -1,4 +1,4 @@
-const { emit, subscribe } = require("../fork");
+const { emit, subscribe } = require("../../fork");
 
 const all = subscribe("all", ({ message }) => {
   console.log(`[another fork] Message for all ${message}`);

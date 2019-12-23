@@ -2,7 +2,7 @@ const UUID = require("uuid/v4");
 
 let pool = [];
 
-const messageProcess = (fork, m) => {
+const messageProcess = (process, worker, m) => {
   try {
     if (m.type === "message") {
       emitList(m);
@@ -18,7 +18,7 @@ const messageProcess = (fork, m) => {
       id: m.id,
       type: "message",
       channel: m.channel,
-      callback: msg => fork.send(msg)
+      callback: msg => worker ? process.postMessage(msg) : process.send(msg)
     });
   } catch (e) {
     console.error(e);
@@ -63,9 +63,11 @@ const subscribe = (channel, callback) => {
   };
 };
 
-const setup = fork => {
+const setup = (process) => {
+  const worker = process.constructor.name === 'Worker'
+
   try {
-    fork.on("message", messageProcess.bind(null, fork));
+    process.on("message", messageProcess.bind(null, process, worker));
   } catch (e) {
     console.log(e);
   }

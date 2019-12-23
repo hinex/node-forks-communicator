@@ -1,7 +1,7 @@
 {
   "name": "forks-communicator",
-  "version": "0.0.1",
-  "description": "Node.js fork communicator (messages between processes)",
+  "version": "0.1.0",
+  "description": "Node.js fork and worker communicator (messages between processes)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "nodejs",
-    "forks",
+    "worker",
+    "fork",
     "communicator",
     "observer"
   ],
