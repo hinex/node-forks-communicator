@@ -1,6 +1,6 @@
 {
   "name": "forks-communicator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node.js fork and worker communicator (messages between processes)",
   "main": "index.js",
   "scripts": {
