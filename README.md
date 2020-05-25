@@ -1,4 +1,4 @@
-# Node.js fork communicator (messages between processes)
+# Node.js fork communicator (messages between processes) hohohoohoh
 
 Small library for communication between forks. This library is created for small projects that do not need to store queues and no guarantee of receipt. For more complex tasks, use [rabbitmq](https://www.rabbitmq.com/) or [another message-broker](https://stackshare.io/rabbitmq/alternatives).
 
